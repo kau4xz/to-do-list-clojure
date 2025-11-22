@@ -1,0 +1,9 @@
+.cpcache/
+.shadow-cljs/
+node_modules/
+target/
+classes/
+resources/public/js
+.buno*
+todo.db
+.DS_Store
