@@ -3,44 +3,47 @@
             [reitit.ring :as ring]
             [ring.util.response :as response]
             [clojure.data.json :as json]
-            [ring.middleware.cors :refer [wrap-cors]]))
-
-;; --- BANCO DE DADOS (SIMULADO) ---
-;; Um átomo que guarda uma lista de mapas.
-(def todos (atom [{:id 1 :title "Configurar Ambiente" :done true}
-                  {:id 2 :title "Criar API" :done false}]))
-
-;; --- HANDLERS (Funções que lidam com as requisições) ---
+            [ring.middleware.cors :refer [wrap-cors]]
+            [db :as db]))
 
 (defn get-todos [_]
-  (-> (response/response (json/write-str @todos))
-      (response/header "Content-Type" "application/json")))
+  (let [todos (db/get-all)]
+    (-> (response/response (json/write-str todos))
+        (response/header "Content-Type" "application/json"))))
 
 (defn create-todo [request]
-  ;; Lê o corpo da requisição (JSON), converte para mapa Clojure
-  (let [body (json/read-str (slurp (:body request)) :key-fn keyword)
-        ;; Cria a nova tarefa com ID aleatório
-        new-todo {:id (rand-int 9999)
-                  :title (:title body)
-                  :done false}]
-    ;; Adiciona na lista (atom)
-    (swap! todos conj new-todo)
-    ;; Retorna a lista atualizada
+  (let [body (json/read-str (slurp (:body request)) :key-fn keyword)]
+    (db/insert (:title body))
     (get-todos nil)))
 
-;; --- ROTEAMENTO ---
+;; --- NOVOS HANDLERS ---
+
+(defn toggle-todo [request]
+  (let [id (get-in request [:path-params :id])]
+    (db/toggle id)
+    (get-todos nil))) ;; Retorna a lista atualizada
+
+(defn delete-todo [request]
+  (let [id (get-in request [:path-params :id])]
+    (db/delete id)
+    (get-todos nil))) ;; Retorna a lista atualizada
 
 (def app
-  (ring/ring-handler
-   (ring/router
-    ["/api"
-     ["/todos" {:get get-todos
-                :post create-todo}]])
-   (ring/routes
-    (ring/create-default-handler))))
-
-;; --- MAIN ---
+  (-> (ring/ring-handler
+       (ring/router
+        ["/api"
+         ["/todos" {:get get-todos :post create-todo}]
+         ;; Novas Rotas Dinâmicas (:id)
+         ["/todos/:id/toggle" {:put toggle-todo}]
+         ["/todos/:id"        {:delete delete-todo}]])
+       (ring/routes
+        (ring/create-default-handler)))
+      (wrap-cors :access-control-allow-origin [#".*"]
+                 :access-control-allow-methods [:get :put :post :delete]
+                 :access-control-allow-headers ["Content-Type"]
+                 :access-control-allow-credentials "true")))
 
 (defn -main []
-  (println "Servidor API rodando na porta 3000")
+  (db/init-db)
+  (println "Servidor Completo rodando na porta 3000")
   (jetty/run-jetty app {:port 3000 :join? false}))

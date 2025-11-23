@@ -1,6 +1,11 @@
 {:source-paths ["src"]
  :dependencies [[reagent "1.2.0"]
                 [cljs-http "0.1.46"]]
+ 
+ ;; --- AQUI ESTA A CORREÇÃO ---
+ :dev-http {8080 "resources/public"}
+ ;; Isso diz: "Crie um servidor na porta 8080 servindo a pasta resources/public"
+ 
  :builds {:app {:target :browser
                 :output-dir "resources/public/js"
                 :asset-path "/js"

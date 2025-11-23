@@ -1,0 +1,105 @@
+/* Variáveis Padrão (Modo Claro) */
+:root {
+    --bg-color: #f4f4f4;
+    --card-bg: #ffffff;
+    --text-color: #333333;
+    --border-color: #e0e0e0;
+    --primary-color: #007bff;
+}
+
+/* Variáveis Modo Escuro (Quando a classe .dark estiver no body) */
+body.dark {
+    --bg-color: #1a1a1a;
+    --card-bg: #2d2d2d;
+    --text-color: #e0e0e0;
+    --border-color: #444444;
+    --primary-color: #4dabf7;
+}
+
+/* Aplicação Global */
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background-color 0.3s, color 0.3s; /* Animação suave */
+    margin: 0;
+}
+
+/* Estilos para os componentes */
+.todo-container {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.todo-item {
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* --- ESTILO DO TOGGLE SWITCH --- */
+
+/* Container que segura os textos e o botão */
+.theme-switch-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.theme-label {
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: var(--text-color);
+    letter-spacing: 1px; /* Deixa as letras mais separadas como na imagem */
+}
+
+/* O container do botão em si */
+.theme-switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 26px;
+    margin: 0;
+}
+
+/* Esconde o checkbox padrão feio */
+.theme-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* A trilha (o fundo da pílula) */
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc; /* Cor quando desligado (Dark) */
+    transition: .4s;
+    border-radius: 34px;
+}
+
+/* A bolinha (o botão deslizante) */
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+/* Quando estiver checked (Light Mode ativado), muda a cor do fundo */
+input:checked + .slider {
+    background-color: var(--primary-color);
+}
+
+/* Quando estiver checked, move a bolinha para a direita */
+input:checked + .slider:before {
+    transform: translateX(24px);
+}
