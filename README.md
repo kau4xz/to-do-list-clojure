@@ -1,44 +1,48 @@
-# todo
+# Todo List - Clojure & ClojureScript
 
-FIXME: description
+> **Atividade:** Desenvolvimento de um Todo List Fullstack
+> **Disciplina:** Programação Funcional
+> **Aluno:** [SEU NOME COMPLETO AQUI]
 
-## Installation
+## 📄 Descrição
+Esta aplicação é uma lista de tarefas (Todo List) completa (Fullstack), desenvolvida para aplicar conceitos de Programação Funcional com Clojure. O sistema permite criar, listar, completar e excluir tarefas, com persistência de dados real e uma interface moderna com suporte a **Tema Escuro (Dark Mode)**.
 
-Download from https://example.com/FIXME.
+**Tutorial Base:** [Tutorial Clojure/ClojureScript - Prof. Sergio Costa](https://profsergiocosta.notion.site/Tutorial-Clojure-ClojureScript-Construindo-uma-Aplica-o-Persistente-e-Reativa-2a5cce975093807aa9f0f0cb0cf69645)
 
-## Usage
+## 🚀 Funcionalidades Implementadas
+* **Frontend Reativo:** Interface Single Page Application (SPA) construída com Reagent.
+* **API REST:** Backend em Clojure servindo JSON.
+* **Persistência:** Dados salvos em banco de dados **SQLite** (`todo.db`).
+* **CRUD Completo:** Adicionar, Visualizar, Concluir (Toggle) e Excluir tarefas.
+* **Bônus UI:** Toggle Switch para alternar entre **Dark Mode** e Light Mode.
 
-FIXME: explanation
+## 🛠 Tecnologias
+* **Backend:** Clojure, Leiningen, Ring, Reitit, Next.jdbc, SQLite-jdbc.
+* **Frontend:** ClojureScript, Shadow-CLJS, Reagent (React Wrapper).
 
-    $ java -jar todo-0.1.0-standalone.jar [args]
+## ⚙️ Como Rodar o Projeto
 
-## Options
+Para executar a aplicação, você precisará de dois terminais abertos.
 
-FIXME: listing of options this app accepts.
+### Pré-requisitos
+* Java JDK (8 ou superior)
+* Leiningen (`lein`)
+* Node.js e NPM
 
-## Examples
+### 1. Instalação
+Clone este repositório e instale as dependências do ecossistema JavaScript:
 
-...
+bash
+git clone https://github.com/kau4xz/to-do-list-clojure.git
+cd nome-da-pasta
+npm install
 
-### Bugs
+### 2. Backend
+Na raiz do projeto execute "lein run"
+para encerrar execute Ctrl + C
 
-...
+### 3. Frontend
+Em um novo terminal, na raiz do projeto, execute: "npx shadow-cljs watch app"
 
-### Any Other Sections
-### That You Think
-### Might be Useful
-
-## License
-
-Copyright © 2025 FIXME
-
-This program and the accompanying materials are made available under the
-terms of the Eclipse Public License 2.0 which is available at
-https://www.eclipse.org/legal/epl-2.0.
-
-This Source Code may also be made available under the following Secondary
-Licenses when the conditions for such availability set forth in the Eclipse
-Public License, v. 2.0 are satisfied: GNU General Public License as published by
-the Free Software Foundation, either version 2 of the License, or (at your
-option) any later version, with the GNU Classpath Exception which is available
-at https://www.gnu.org/software/classpath/license.html.
+### 4. Acessando a Aplicação
+Abra seu navegador e acesse o endereço do frontend (geralmente porta 8080): http://localhost:8080
