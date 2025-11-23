@@ -1,8 +1,8 @@
-# Todo List - Clojure & ClojureScript
+# To-do List - Clojure & ClojureScript
 
 > **Atividade:** Desenvolvimento de um Todo List Fullstack
 > **Disciplina:** Programação Funcional
-> **Aluno:** [SEU NOME COMPLETO AQUI]
+> **Aluno:** Kauã Ferreira Galeno
 
 ## 📄 Descrição
 Esta aplicação é uma lista de tarefas (Todo List) completa (Fullstack), desenvolvida para aplicar conceitos de Programação Funcional com Clojure. O sistema permite criar, listar, completar e excluir tarefas, com persistência de dados real e uma interface moderna com suporte a **Tema Escuro (Dark Mode)**.
