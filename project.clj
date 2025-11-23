@@ -10,6 +10,9 @@
                  [com.github.seancorfield/next.jdbc "1.3.883"]
                  [org.xerial/sqlite-jdbc "3.42.0.0"]
                  [org.clojure/data.json "2.4.0"]]
+  
+  :source-paths ["src"]  ;; <--- ADICIONE ESTA LINHA PARA GARANTIR
+  
   :main ^:skip-aot server
   :target-path "target/%s"
   :profiles {:uberjar {:aot :all
